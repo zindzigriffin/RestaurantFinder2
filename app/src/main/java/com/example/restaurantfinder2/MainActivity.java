@@ -7,11 +7,14 @@ import android.view.View;
 import android.widget.Button;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.restaurantfinder2.adapters.RestaurantsAdapter;
 import com.example.restaurantfinder2.models.Restaurants;
 import com.parse.ParseUser;
 
@@ -19,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
@@ -33,6 +37,14 @@ public class MainActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        //Create the adapter
+        RestaurantsAdapter restaurantAdapter =  new RestaurantsAdapter(this, restaurant);
+        RecyclerView recyclerViewRestaurants = findViewById(R.id.rvRestaurants);
+        restaurant = new ArrayList<>();
+        //Set the adapter on the recyclerView
+        recyclerViewRestaurants.setAdapter(restaurantAdapter);
+        //Set the layout manager on the recyclerView
+        recyclerViewRestaurants.setLayoutManager(new LinearLayoutManager(this));
         AsyncHttpClient client = new AsyncHttpClient();
         logoutButton = findViewById(R.id.logoutButton);
         RequestParams params = new RequestParams();
@@ -50,7 +62,8 @@ public class MainActivity extends AppCompatActivity {
                 try {
                     JSONArray businesses = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Results "+ businesses.toString());
-                    restaurant = Restaurants.fromJSONArray(businesses);
+                    restaurant.addAll(Restaurants.fromJSONArray(businesses));
+                    restaurantAdapter.notifyDataSetChanged();
                     Log.i(TAG, "Restaurant "+ restaurant.size());
                 } catch (JSONException e) {
                     Log.e(TAG, "hit JSON Exception", e);
