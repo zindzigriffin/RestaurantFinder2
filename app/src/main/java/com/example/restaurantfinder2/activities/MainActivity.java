@@ -1,4 +1,4 @@
-package com.example.restaurantfinder2;
+package com.example.restaurantfinder2.activities;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -14,6 +14,7 @@ import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
+import com.example.restaurantfinder2.R;
 import com.example.restaurantfinder2.adapters.RestaurantsAdapter;
 import com.example.restaurantfinder2.models.Restaurants;
 import com.parse.ParseUser;
