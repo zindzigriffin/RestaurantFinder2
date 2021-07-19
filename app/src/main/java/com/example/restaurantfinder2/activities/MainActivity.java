@@ -26,7 +26,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
-
+//This class retrieves data from the yelp api and displays a list of restaurants
+//This class is launched after the login activity once the user has logged in appropriately
 public class MainActivity extends AppCompatActivity {
     public static final String list_of_restaurants = "https://api.yelp.com/v3/businesses/search?term=food&location=San%20Francisco";
     public static final String TAG = "MainActivity";
@@ -45,6 +46,7 @@ public class MainActivity extends AppCompatActivity {
         recyclerViewRestaurants.setAdapter(restaurantAdapter);
         //Set the layout manager on the recyclerView
         recyclerViewRestaurants.setLayoutManager(new LinearLayoutManager(this));
+        //Create an instance of the asyncHttpClient method
         AsyncHttpClient client = new AsyncHttpClient();
         logoutButton = findViewById(R.id.logoutButton);
         RequestParams params = new RequestParams();
@@ -60,9 +62,12 @@ public class MainActivity extends AppCompatActivity {
                 Log.d(TAG, "onSuccess");
                 JSONObject jsonObject = json.jsonObject;
                 try {
+                    //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
                     JSONArray businesses = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Results "+ businesses.toString());
+                    //Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator (optional operation).
                     restaurant.addAll(Restaurants.fromJSONArray(businesses));
+                    //Notify any registered observers that the data set has changed.
                     restaurantAdapter.notifyDataSetChanged();
                     Log.i(TAG, "Restaurant "+ restaurant.size());
                 } catch (JSONException e) {
@@ -77,6 +82,7 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+        //onClick listener for the user to logout and return to the sign in screen
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
