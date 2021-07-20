@@ -107,7 +107,7 @@ public class LoginActivity extends AppCompatActivity {
                 }
                 goMainActivity();
                 Toast.makeText(LoginActivity.this,"Success",Toast.LENGTH_SHORT).show();
-                Log.e(TAG, "login activity repeating");
+                Log.e(TAG, "gone to main activity");
             }
         });
     }

@@ -17,6 +17,7 @@ import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.restaurantfinder2.R;
 import com.example.restaurantfinder2.adapters.RestaurantsAdapter;
 import com.example.restaurantfinder2.models.Restaurants;
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.parse.ParseUser;
 
 import org.json.JSONArray;
@@ -34,19 +35,24 @@ public class MainActivity extends AppCompatActivity {
     public static final String TAG = "MainActivity";
     public static final String finalToken = "PvwkfBvULdU-SXiMYBE6IDJQ8bNIKtZc0kHZ0CbUEOli3rMz0RprwInlAniV1G887HJvjOMjSs9K00fD8v627WbtZ5bxn5-qUXQ1rkXKpPXbXQ5aRF37LrDaluTtYHYx";
     List<Restaurants> restaurant;
+    private RecyclerView rvRestaurants;
+    private RestaurantsAdapter restaurantsAdapter;
     Button logoutButton;
+    private BottomNavigationView bottomNavigationView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //Create the adapter
-        RestaurantsAdapter restaurantAdapter =  new RestaurantsAdapter(this, restaurant);
-        RecyclerView recyclerViewRestaurants = findViewById(R.id.rvRestaurants);
+        rvRestaurants = findViewById(R.id.rvRestaurants);
+        bottomNavigationView = findViewById(R.id.bottomNavigation);
         restaurant = new ArrayList<>();
+        //Create the adapter
+        restaurantsAdapter =  new RestaurantsAdapter(this, restaurant);
+        rvRestaurants.setLayoutManager(new LinearLayoutManager(this));
         //Set the adapter on the recyclerView
-        recyclerViewRestaurants.setAdapter(restaurantAdapter);
+        rvRestaurants.setAdapter(restaurantsAdapter);
         //Set the layout manager on the recyclerView
-        recyclerViewRestaurants.setLayoutManager(new LinearLayoutManager(this));
+       //rvRestaurants.setLayoutManager(new LinearLayoutManager(this));
         //Create an instance of the asyncHttpClient method
         AsyncHttpClient client = new AsyncHttpClient();
         logoutButton = findViewById(R.id.logoutButton);
@@ -66,10 +72,11 @@ public class MainActivity extends AppCompatActivity {
                     //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
                     JSONArray businesses = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Results "+ businesses.toString());
+                    List<Restaurants> restaurants = Restaurants.fromJSONArray(businesses);
                     //Appends all of the elements in the specified collection to the end of this list, in the order that they are returned by the specified collection's iterator (optional operation).
-                    restaurant.addAll(Restaurants.fromJSONArray(businesses));
+                    restaurant.addAll(restaurants);
                     //Notify any registered observers that the data set has changed.
-                    restaurantAdapter.notifyDataSetChanged();
+                    restaurantsAdapter.notifyDataSetChanged();
                     Log.i(TAG, "Restaurant "+ restaurant.size());
                 } catch (JSONException e) {
                     Log.e(TAG, "hit JSON Exception", e);
@@ -93,4 +100,5 @@ public class MainActivity extends AppCompatActivity {
             }
         });
     }
+
 }

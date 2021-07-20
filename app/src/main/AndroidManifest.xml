@@ -14,6 +14,8 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.RestaurantFinder2"
         android:usesCleartextTraffic="true">
+        <activity android:name=".activities.Profile">
+        </activity>
         <activity android:name=".activities.LoginActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

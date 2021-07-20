@@ -1,6 +1,7 @@
 package com.example.restaurantfinder2.adapters;
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -27,11 +28,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         mRestaurant = restaurant;
     }
 
+    /**
+     *
+     */
     @NonNull
     @NotNull
     @Override
     //Usually involves inflating a layout from XML and returning the holder
-    public ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
+    public RestaurantsAdapter.ViewHolder onCreateViewHolder(@NonNull @NotNull ViewGroup parent, int viewType) {
         View restaurantView = LayoutInflater.from(mContext).inflate(R.layout.item_restaurant, parent, false);
         return new ViewHolder(restaurantView);
     }
@@ -46,7 +50,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
     @Override
     public int getItemCount() {
-        return 0;
+        return mRestaurant.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
@@ -73,7 +77,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         public void bind(Restaurants restaurant) {
             textViewName.setText(restaurant.getName());
             textViewAddress.setText(restaurant.getLocation());
-            textViewPrice.setText(restaurant.getPrice());
+            Log.i("RestaurantsAdapter", restaurant.getName());
         }
     }
 }

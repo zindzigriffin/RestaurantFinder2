@@ -13,7 +13,7 @@ public class Restaurants {
     String name;
     String phone;
     String imageUrl;
-    String price;
+    //String price;
     String rating;
     String location;
 
@@ -24,7 +24,7 @@ public class Restaurants {
         id = jsonObject.getString("phone");
         imageUrl = jsonObject.getString("image_url");
         phone = jsonObject.getString("phone");
-        price = jsonObject.getString("price");
+        //price = jsonObject.getString("price");
         rating = jsonObject.getString("rating");
         location = jsonObject.getString("location");
     }
@@ -58,9 +58,9 @@ public class Restaurants {
         return imageUrl;
     }
 
-    public String getPrice() {
-        return price;
-    }
+//    //public String getPrice() {
+//        return price;
+//    }
 
     public String getRating() {
         return rating;
