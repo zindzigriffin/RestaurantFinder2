@@ -35,9 +35,12 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
-
+    //This event is triggered soon after onCreateView();
+    //Any view setup should occur here
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+
+
     }
 }

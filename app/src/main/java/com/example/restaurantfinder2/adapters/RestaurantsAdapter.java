@@ -6,16 +6,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.RatingBar;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.restaurantfinder2.R;
 import com.example.restaurantfinder2.models.Restaurants;
 
 import org.jetbrains.annotations.NotNull;
+import org.json.JSONException;
 
 import java.util.List;
 
@@ -45,7 +46,11 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         //Get the restaurant at a postion
         Restaurants restaurant = mRestaurant.get(position);
         //Bind the restaurant data into a viewholder
-        holder.bind(restaurant);
+        try {
+            holder.bind(restaurant);
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     @Override
@@ -60,23 +65,25 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         TextView textViewCategory;
         TextView textViewDistance;
         TextView textViewPrice;
+        TextView textViewPhone;
         ImageView imageView;
-        RatingBar ratingBar;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.tvName);
             imageView = itemView.findViewById(R.id.imageView);
-            textViewCategory = itemView.findViewById(R.id.tvCategory);
+            textViewPhone = itemView.findViewById(R.id.tvPhone);
+            //textViewCategory = itemView.findViewById(R.id.tvCategory);
             textViewAddress = itemView.findViewById(R.id.tvAddress);
-            textViewDistance = itemView.findViewById(R.id.tvDistance);
-            textViewPrice = itemView.findViewById(R.id.tvPrice);
-            ratingBar = itemView.findViewById(R.id.ratingBar);
+            //textViewDistance = itemView.findViewById(R.id.tvDistance);
+            //textViewPrice = itemView.findViewById(R.id.tvPrice);
         }
 
-        public void bind(Restaurants restaurant) {
+        public void bind(Restaurants restaurant) throws JSONException{
             textViewName.setText(restaurant.getName());
-            textViewAddress.setText(restaurant.getLocation());
+            Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);
+            textViewAddress.setText(restaurant.getLocation().getString("address1"));
+            textViewPhone.setText(restaurant.getPhone());
             Log.i("RestaurantsAdapter", restaurant.getName());
         }
     }

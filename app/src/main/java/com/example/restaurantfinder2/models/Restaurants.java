@@ -15,7 +15,7 @@ public class Restaurants {
     String imageUrl;
     //String price;
     String rating;
-    String location;
+    JSONObject location;
 
     //Construct a restaurant object
     public Restaurants(JSONObject jsonObject) throws JSONException {
@@ -26,7 +26,9 @@ public class Restaurants {
         phone = jsonObject.getString("phone");
         //price = jsonObject.getString("price");
         rating = jsonObject.getString("rating");
-        location = jsonObject.getString("location");
+        location = jsonObject.getJSONObject("location");
+        String address1 = location.getString("address1");
+        int i = 0;
     }
     //iterating through the list of restaurants and constructing an element for each restaurant in thid JSON array
     public static List<Restaurants> fromJSONArray(JSONArray restaurantsJsonArray) throws JSONException {
@@ -58,15 +60,12 @@ public class Restaurants {
         return imageUrl;
     }
 
-//    //public String getPrice() {
-//        return price;
-//    }
 
     public String getRating() {
         return rating;
     }
 
-    public String getLocation() {
+    public JSONObject getLocation() {
         return location;
     }
 }

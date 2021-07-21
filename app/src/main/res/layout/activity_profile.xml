@@ -8,10 +8,10 @@
     android:orientation="vertical"
     tools:context=".activities.Profile">
     <FrameLayout
-        android:id="@+id/flcontainer"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_above="@id/bottomNavigation"/>
+    android:id="@+id/flcontainer"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:layout_above="@id/bottomNavigation"/>
     <include layout="@layout/toolbar"/>
 
     <LinearLayout
@@ -26,13 +26,14 @@
             android:src="@drawable/zindzi" />
 
         <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Zindzi Griffin"
-        android:textColor="@color/black"
-        android:textSize="20dp"
-        android:layout_margin="8dp"
-        android:textStyle="bold"/>
+            android:id="@+id/tvName"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="8dp"
+            android:text="Zindzi Griffin"
+            android:textColor="@color/black"
+            android:textSize="20dp"
+            android:textStyle="bold" />
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
@@ -52,14 +53,16 @@
             android:layout_width="25dp"
             android:layout_height="25dp"
             android:src="@drawable/ic_person"/>
+
         <TextView
+            android:id="@+id/tvFirstName"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="5dp"
             android:text="First Name"
-            android:textStyle="bold"
             android:textColor="@color/black"
             android:textSize="18dp"
-            android:layout_marginLeft="5dp"/>
+            android:textStyle="bold" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -87,17 +90,20 @@
             android:gravity="center_vertical">
 
             <ImageView
+                android:id="@+id/ivProfileImage"
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_person"/>
+                android:src="@drawable/ic_person" />
+
             <TextView
+                android:id="@+id/tvLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="Last Name"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:layout_marginLeft="5dp"/>
+                android:textStyle="bold" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -111,41 +117,42 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
             android:orientation="vertical">
+
             <TextView
+                android:id="@+id/editProfile"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="-10dp"
                 android:background="@drawable/bg_btn"
+                android:drawableLeft="@drawable/ic_edit"
                 android:gravity="center"
+                android:paddingLeft="10dp"
                 android:text="Edit Profile"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:drawableLeft="@drawable/ic_edit"
-                android:paddingLeft="10dp"
-                android:layout_marginLeft="-10dp"/>
+                android:textSize="18dp" />
+
             <TextView
+                android:id="@+id/changePassword"
                 android:layout_width="240dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="-10dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/bg_btn"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:gravity="center"
+                android:paddingLeft="10dp"
                 android:text="Change Password"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:paddingLeft="10dp"
-                android:layout_marginLeft="-10dp"
-                android:layout_marginTop="15dp" />
+                android:textSize="18dp" />
+<!--            <com.google.android.material.bottomnavigation.BottomNavigationView-->
+<!--                android:id="@+id/bottomNavigation"-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_alignParentBottom="true"-->
+<!--                app:menu="@menu/menu_bottom_navigation" />-->
 
 
         </LinearLayout>
-        <com.google.android.material.bottomnavigation.BottomNavigationView
-            android:id="@+id/bottomNavigation"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            app:menu="@menu/menu_bottom_navigation" />
-
 
 </LinearLayout>
-
-
 </RelativeLayout>
