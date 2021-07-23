@@ -10,8 +10,11 @@ import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 
 import com.example.restaurantfinder2.R;
+import com.example.restaurantfinder2.fragments.FavoritesFragment;
 import com.example.restaurantfinder2.fragments.MainFragment;
 import com.example.restaurantfinder2.fragments.ProfileFragment;
+import com.example.restaurantfinder2.fragments.RecommendFragment;
+import com.example.restaurantfinder2.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 
 import org.jetbrains.annotations.NotNull;
@@ -37,7 +40,7 @@ public class MainActivity extends AppCompatActivity {
                 Fragment selectedFragment;
                 switch (menuItem.getItemId()) {
                     case R.id.action_favorites:
-                        selectedFragment = new ProfileFragment();
+                        selectedFragment = new FavoritesFragment();
                         Log.d(TAG, "Favorites!");
                         break;
                     case R.id.action_home:
@@ -49,11 +52,11 @@ public class MainActivity extends AppCompatActivity {
                         Log.d(TAG, "Profile!");
                         break;
                     case R.id.action_recommend:
-                        selectedFragment = new ProfileFragment();
+                        selectedFragment = new RecommendFragment();
                         Log.d(TAG, "Recommend!");
                         break;
                     case R.id.action_search:
-                        selectedFragment = new ProfileFragment();
+                        selectedFragment = new SearchFragment();
                         Log.d(TAG, "Search!");
                         break;
                     default:

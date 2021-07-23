@@ -33,7 +33,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
-
+//This fragment contains the user's main feed which is a list of restaurants and their attributes.
 public class MainFragment extends Fragment {
     public static final String list_of_restaurants = "https://api.yelp.com/v3/businesses/search?term=food&location=San%20Francisco";
     public static final String TAG = "MainActivity";
@@ -59,19 +59,22 @@ public class MainFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        //find the recyclerView of the restaurants by ID
         rvRestaurants = view.findViewById(R.id.rvRestaurants);
+        //create an arrayList of restaurants
         restaurant = new ArrayList<>();
         //Create the adapter
         restaurantsAdapter =  new RestaurantsAdapter(getContext(), restaurant);
+        //Set the layout manager on the recyclerView
         rvRestaurants.setLayoutManager(new LinearLayoutManager(getContext()));
         //Set the adapter on the recyclerView
         rvRestaurants.setAdapter(restaurantsAdapter);
-        //Set the layout manager on the recyclerView
         //Create an instance of the asyncHttpClient method
         AsyncHttpClient client = new AsyncHttpClient();
+        //find the logout button by ID
         logoutButton = view.findViewById(R.id.logoutButton);
         RequestParams params = new RequestParams();
-        params.put("limit", "5");
+        params.put("limit", "25");
         params.put("page", 0);
         RequestHeaders header = new RequestHeaders();
         header.put("Authorization", "Bearer " + finalToken);

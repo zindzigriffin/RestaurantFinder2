@@ -13,11 +13,7 @@ import com.example.restaurantfinder2.R;
 
 import org.jetbrains.annotations.NotNull;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link ProfileFragment} factory method to
- * create an instance of this fragment.
- */
+//The profile fragment will allow the user to view their profile and make changes such as edit their first and last name
 public class ProfileFragment extends Fragment {
     public static final String TAG = "ProfileFragment";
 

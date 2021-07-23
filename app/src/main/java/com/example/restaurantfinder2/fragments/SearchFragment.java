@@ -1,61 +1,52 @@
 package com.example.restaurantfinder2.fragments;
 
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
+import androidx.appcompat.widget.SearchView;
+import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.codepath.asynchttpclient.AsyncHttpClient;
+import com.codepath.asynchttpclient.RequestHeaders;
+import com.codepath.asynchttpclient.RequestParams;
+import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.restaurantfinder2.R;
+import com.example.restaurantfinder2.adapters.RecipesAdapter;
+import com.example.restaurantfinder2.models.Recipes;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link SearchFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+import org.jetbrains.annotations.NotNull;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
+
+import okhttp3.Headers;
+//The search fragment allows the user to searchh for recipes by entering some ingredients into a searchbar.
 public class SearchFragment extends Fragment {
+    public static final String APP_ID = "5420521";
+    public static final String API_KEY = "960b664e1bmsh613e17b2b2ceab3p1a2fe3jsnce5dbacacf52";
+    public static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast";
+    public static final String TAG = "SearchFragment";
+    public RecyclerView recyclerViewRecipes;
+    public RecipesAdapter recipesAdapter;
+    private ArrayList<Recipes> aRecipes;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public SearchFragment() {
         // Required empty public constructor
     }
 
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment SearchFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static SearchFragment newInstance(String param1, String param2) {
-        SearchFragment fragment = new SearchFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -63,4 +54,80 @@ public class SearchFragment extends Fragment {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false);
     }
+
+    @Override
+    public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+        // Setting toolbar
+        Toolbar toolbar = view.findViewById(R.id.toolbar);
+        recyclerViewRecipes = view.findViewById(R.id.rvRecipes);
+        aRecipes = new ArrayList<>();
+        // Initialize the adapter
+        recipesAdapter = new RecipesAdapter(getContext(), aRecipes);
+        // Attach the adapter to the RecyclerView
+        recyclerViewRecipes.setAdapter(recipesAdapter);
+
+        // Set layout manager to position the items
+        recyclerViewRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
+        //creating an instance of AsyncHttpClient
+
+        //Get data from the searchView & query the API to get the results (Recipes)
+        final SearchView searchView = view.findViewById(R.id.search_view);
+        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+            @Override
+            public boolean onQueryTextSubmit(String query) {
+                Log.d(TAG, "success!");
+                fetchRecipes(query);
+                Toast.makeText(getContext(), "Our word : " + query, Toast.LENGTH_SHORT).show();
+                return true;
+            }
+
+            @Override
+            public boolean onQueryTextChange(String newText) {
+                return false;
+            }
+        });
+
+    }
+
+    public void fetchRecipes(String query) {
+        AsyncHttpClient client = new AsyncHttpClient();
+        RequestParams params = new RequestParams();
+        params.put("limit", "15");
+        params.put("page", 0);
+        RequestHeaders header = new RequestHeaders();
+        //inserting api as a header
+        header.put("x-rapidapi-key", "960b664e1bmsh613e17b2b2ceab3p1a2fe3jsnce5dbacacf52");
+        header.put("x-rapidapi-host", "themealdb.p.rapidapi.com");
+        //making a get request to the API
+        client.get(BASE_URL, header, params, new JsonHttpResponseHandler() {
+            @Override
+            public void onSuccess(int statusCode, Headers headers, JSON json) {
+                //printing onSuccess if reponse is successful
+                Log.d(TAG, "onSuccess");
+                JSONObject jsonObject = json.jsonObject;
+                try {
+                    //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
+                    JSONArray meals = jsonObject.getJSONArray("meals");
+                    List<Recipes> recipes = Recipes.fromJSONArray(meals);
+                    aRecipes.addAll(recipes);
+                    recipesAdapter.notifyDataSetChanged();
+                    Log.i(TAG, "Meals" + meals.toString());
+                    //recipesAdapter.notifyDataSetChanged();
+                } catch (JSONException e) {
+                    Log.e(TAG, "hit JSON Exception", e);
+                    e.printStackTrace();
+                }
+            }
+
+            @Override
+            public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
+                Log.d(TAG, "onFailure");
+
+            }
+        });
+
+
+    }
 }
+

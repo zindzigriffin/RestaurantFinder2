@@ -62,9 +62,6 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
         TextView textViewName;
         TextView textViewAddress;
-        TextView textViewCategory;
-        TextView textViewDistance;
-        TextView textViewPrice;
         TextView textViewPhone;
         ImageView imageView;
 
@@ -73,12 +70,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             textViewName = itemView.findViewById(R.id.tvName);
             imageView = itemView.findViewById(R.id.imageView);
             textViewPhone = itemView.findViewById(R.id.tvPhone);
-            //textViewCategory = itemView.findViewById(R.id.tvCategory);
             textViewAddress = itemView.findViewById(R.id.tvAddress);
-            //textViewDistance = itemView.findViewById(R.id.tvDistance);
-            //textViewPrice = itemView.findViewById(R.id.tvPrice);
         }
-
+        //Binds the data from the adapter to the recyclerView
         public void bind(Restaurants restaurant) throws JSONException{
             textViewName.setText(restaurant.getName());
             Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);

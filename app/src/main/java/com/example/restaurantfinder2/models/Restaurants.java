@@ -28,9 +28,8 @@ public class Restaurants {
         rating = jsonObject.getString("rating");
         location = jsonObject.getJSONObject("location");
         String address1 = location.getString("address1");
-        int i = 0;
     }
-    //iterating through the list of restaurants and constructing an element for each restaurant in thid JSON array
+    //iterating through the list of restaurants and constructing an element for each restaurant in the JSON array
     public static List<Restaurants> fromJSONArray(JSONArray restaurantsJsonArray) throws JSONException {
         List<Restaurants> restaurant = new ArrayList<>();
         for(int i = 0; i< restaurantsJsonArray.length(); i++ ){
