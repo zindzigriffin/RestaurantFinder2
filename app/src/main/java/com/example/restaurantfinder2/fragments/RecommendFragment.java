@@ -100,7 +100,7 @@ public class RecommendFragment extends Fragment{
         RequestParams params = new RequestParams();
         params.put("limit", "25");
         params.put("location", query);
-        params.put("categories", query);
+        params.put("category", query);
         RequestHeaders header = new RequestHeaders();
         //inserting api as a header
         header.put("Authorization", "Bearer " + finalToken);
