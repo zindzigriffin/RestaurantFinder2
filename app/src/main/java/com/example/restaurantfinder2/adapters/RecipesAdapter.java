@@ -17,8 +17,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
-    private List<Recipes> mRecipes;
-    private Context mContext;
+    List<Recipes> mRecipes;
+    public Context mContext;
 
     // Define listener member variable
     private OnItemClickListener listener;
@@ -46,12 +46,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
             imageViewRecipeImage = (ImageView)itemView.findViewById(R.id.iVRecipeImage);
             textViewFoodName = (TextView)itemView.findViewById(R.id.tvFoodName);
 
-//            itemView.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View v) {
-//                    clickListener.onItemClick(itemView, getAdapterPosition());
-//                }
-//            });
         }
 
         public void bind(Recipes recipes) {
@@ -88,9 +82,6 @@ public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHold
         // Get the data model based on position
         Recipes recipes = mRecipes.get(position);
         holder.bind(recipes);
-//        // Populate data into the template view using the data object
-//        holder.textViewFoodName.setText(recipes.getLabel());
-//        Glide.with(mContext).load(recipes.getImage()).into(holder.imageViewRecipeImage);
 
     }
 

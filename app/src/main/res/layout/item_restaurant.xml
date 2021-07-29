@@ -14,7 +14,14 @@
         android:layout_marginStart="0dp"
         android:layout_marginTop="0dp"
         tools:srcCompat="@tools:sample/avatars" />
-
+    <ImageView
+        android:id="@+id/ivHeart"
+        android:layout_width="120dp"
+        android:layout_height="120dp"
+        android:layout_marginStart="0dp"
+        android:layout_marginLeft="0dp"
+        app:srcCompat= "@drawable/avd_instagram_like"
+        android:alpha = "0"/>
     <TextView
         android:id="@+id/tvName"
         android:layout_width="wrap_content"
@@ -26,16 +33,6 @@
         android:textSize="24sp" />
 
 
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvNumReviews"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentBottom="true"-->
-    <!--        android:layout_centerHorizontal="true"-->
-    <!--        android:layout_marginTop="5dp"-->
-    <!--        android:layout_marginEnd="5dp"-->
-    <!--        android:layout_marginBottom="14dp"-->
-    <!--        android:text="321 Reviews" />-->
 
     <TextView
         android:id="@+id/tvAddress"
@@ -56,34 +53,4 @@
         android:layout_marginStart="5dp"
         android:layout_marginTop="5dp"
         android:layout_toEndOf="@id/imageView" />
-
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvCategory"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_marginStart="5dp"-->
-    <!--        android:layout_marginTop="5dp"-->
-    <!--        android:layout_toEndOf="@id/imageView"-->
-    <!--        android:text="Breakfast" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvDistance"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_marginTop="92dp"-->
-    <!--        android:layout_marginEnd="34dp"-->
-    <!--        tools:text="1.7 mi" />-->
-
-    <!--    <TextView-->
-    <!--        android:id="@+id/tvPrice"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:layout_alignParentTop="true"-->
-    <!--        android:layout_alignParentEnd="true"-->
-    <!--        android:layout_marginTop="17dp"-->
-    <!--        android:layout_marginEnd="53dp"-->
-    <!--        tools:text="$$" />-->
 </RelativeLayout>

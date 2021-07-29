@@ -40,7 +40,7 @@ public class SearchFragment extends Fragment {
     public static final String TAG = "SearchFragment";
     public RecyclerView recyclerViewRecipes;
     public RecipesAdapter recipesAdapter;
-    private ArrayList<Recipes> aRecipes;
+    private ArrayList<Recipes> aRecipes = new ArrayList<>();
 
 
     public SearchFragment() {
@@ -61,14 +61,15 @@ public class SearchFragment extends Fragment {
         // Setting toolbar
         Toolbar toolbar = view.findViewById(R.id.toolbar);
         recyclerViewRecipes = view.findViewById(R.id.rvRecipes);
-        aRecipes = new ArrayList<>();
+        Log.i(TAG, "hi");
         // Initialize the adapter
         recipesAdapter = new RecipesAdapter(getContext(), aRecipes);
         // Attach the adapter to the RecyclerView
         recyclerViewRecipes.setAdapter(recipesAdapter);
-
+        Log.i(TAG, "hi1");
         // Set layout manager to position the items
         recyclerViewRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
+        Log.i(TAG, "hi2");
         //creating an instance of AsyncHttpClient
 
         //Get data from the searchView & query the API to get the results (Recipes)
@@ -92,24 +93,27 @@ public class SearchFragment extends Fragment {
 
     public void fetchRecipes(String query) {
         AsyncHttpClient client = new AsyncHttpClient();
+        Log.i(TAG, "query" + query);
         RequestParams params = new RequestParams();
-        params.put("limit", "15");
-        params.put("page", 0);
+        params.put("i",query);
         RequestHeaders header = new RequestHeaders();
         //inserting api as a header
         header.put("x-rapidapi-key", "960b664e1bmsh613e17b2b2ceab3p1a2fe3jsnce5dbacacf52");
         header.put("x-rapidapi-host", "themealdb.p.rapidapi.com");
         //making a get request to the API
-        client.get(BASE_URL, header, params, new JsonHttpResponseHandler() {
+        Log.d(TAG, "onSuccess");
+        client.get(BASE_URL, params, new JsonHttpResponseHandler() {
             @Override
             public void onSuccess(int statusCode, Headers headers, JSON json) {
-                //printing onSuccess if reponse is successful
-                Log.d(TAG, "onSuccess");
+                //printing onSuccess if response is successful
+                Log.d(TAG, "onSuccess2");
                 JSONObject jsonObject = json.jsonObject;
+                Log.i(TAG, "recipes2");
                 try {
                     //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
                     JSONArray meals = jsonObject.getJSONArray("meals");
                     List<Recipes> recipes = Recipes.fromJSONArray(meals);
+                    Log.i(TAG, "recipes");
                     aRecipes.addAll(recipes);
                     recipesAdapter.notifyDataSetChanged();
                     Log.i(TAG, "Meals" + meals.toString());

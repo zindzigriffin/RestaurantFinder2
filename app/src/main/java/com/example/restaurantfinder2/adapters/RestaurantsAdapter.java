@@ -1,28 +1,36 @@
 package com.example.restaurantfinder2.adapters;
 
 import android.content.Context;
+import android.content.res.Configuration;
+import android.graphics.drawable.AnimatedVectorDrawable;
+import android.graphics.drawable.Drawable;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
+import androidx.vectordrawable.graphics.drawable.AnimatedVectorDrawableCompat;
 
 import com.bumptech.glide.Glide;
 import com.example.restaurantfinder2.R;
 import com.example.restaurantfinder2.models.Restaurants;
+import com.parse.ParseException;
+import com.parse.SaveCallback;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 import java.util.List;
-
+//This class
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
     Context mContext;
     List<Restaurants> mRestaurant;
+
 
     public RestaurantsAdapter(Context context, List<Restaurants> restaurant) {
         mContext= context;
@@ -64,6 +72,10 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         TextView textViewAddress;
         TextView textViewPhone;
         ImageView imageView;
+        ImageView imageViewHeart;
+        AnimatedVectorDrawableCompat avd;
+        AnimatedVectorDrawable avd2;
+        //TextView likeCountTextView;
 
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
@@ -71,14 +83,75 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             imageView = itemView.findViewById(R.id.imageView);
             textViewPhone = itemView.findViewById(R.id.tvPhone);
             textViewAddress = itemView.findViewById(R.id.tvAddress);
+            imageViewHeart = itemView.findViewById(R.id.ivHeart);
+
         }
         //Binds the data from the adapter to the recyclerView
         public void bind(Restaurants restaurant) throws JSONException{
-            textViewName.setText(restaurant.getName());
             Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);
             textViewAddress.setText(restaurant.getLocation().getString("address1"));
             textViewPhone.setText(restaurant.getPhone());
+            textViewName.setText(restaurant.getName());
             Log.i("RestaurantsAdapter", restaurant.getName());
+            Drawable drawable = imageViewHeart.getDrawable();
+            imageView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+
+                    //ParseObject object = new ParseObject("Like");
+                    Restaurants object = new Restaurants();
+//                    object.put("username",ParseUser.getCurrentUser());
+//                    object.put("image_url", restaurant.getImageUrl());
+//                    object.put("id", restaurant.getId());
+                    object.setParseId(restaurant.getId());
+                    object.setParseImageUrl(restaurant.getImageUrl());
+                    //object.put("image_id",restaurant.getImageUrl());
+                    Toast.makeText(mContext, "Restaurant ID" + restaurant.getImageUrl(), Toast.LENGTH_SHORT).show();
+                    object.saveInBackground(new SaveCallback() {
+                        @Override
+                        public void done(ParseException e) {
+                            if(e==null) {
+                                Toast.makeText(mContext, "Object saved!", Toast.LENGTH_SHORT).show();
+                                object.setParseId(restaurant.getId());
+                                object.setParseImageUrl(restaurant.getImageUrl());
+                            } else {
+                                Log.e("XXX", "Object not saved",e );
+                                Toast.makeText(mContext, "Object not saved!", Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+                    imageViewHeart.setAlpha(0.70f);
+                    if(drawable instanceof AnimatedVectorDrawableCompat){
+                        avd = (AnimatedVectorDrawableCompat) drawable;
+                        avd.start();
+
+
+                    }else if(drawable instanceof AnimatedVectorDrawable){
+                        avd2 = (AnimatedVectorDrawable) drawable;
+                        avd2.start();
+
+                    }
+                }
+            });
+            //implementing portait and landscape mode capabilities
+            if(mContext.getResources().getConfiguration().orientation == Configuration.ORIENTATION_LANDSCAPE){
+                Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);
+            }
+            else {
+                Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);
+            }
         }
+    }
+
+    // Clean all elements of the recycler
+    public void clear() {
+        mRestaurant.clear();
+        notifyDataSetChanged();
+    }
+
+    // Add a list of items -- change to type used
+    public void addAll(List<Restaurants> list) {
+        mRestaurant.addAll(list);
+        notifyDataSetChanged();
     }
 }
