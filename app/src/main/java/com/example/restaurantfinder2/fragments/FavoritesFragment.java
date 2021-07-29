@@ -28,6 +28,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 //The favorites fragment will store the user's favorite restaurants which will be acquired when the user clicks on the save button in the main fragment.
+//TODO: Cleanup debug lines and fix null object reference errors
 public class FavoritesFragment extends Fragment {
     private static final String TAG = "FavoritesFragment";
     private RestaurantsAdapter restaurantsAdapter;
@@ -68,6 +69,7 @@ public class FavoritesFragment extends Fragment {
 
         ParseQuery<Restaurants> query = ParseQuery.getQuery("Like");
         query.whereEqualTo("username", ParseUser.getCurrentUser());
+        Restaurants object = new Restaurants();
         query.findInBackground(new FindCallback<Restaurants>() {
             @Override
             public void done(List<Restaurants> likes, ParseException e) {
@@ -77,7 +79,10 @@ public class FavoritesFragment extends Fragment {
 
                     for (Restaurants restaurant : likes) {
                         Log.i(TAG, "Something: " + restaurant.getParseImageId());
-                        restaurantsAdapter.notifyDataSetChanged();
+////                        restaurant.getParseImageId();
+////                        restaurant.getParseImageUrl();
+//                        restaurantsList.addAll(likes);
+//                        restaurantsAdapter.notifyDataSetChanged();
 
                     }
                 } else {

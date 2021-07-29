@@ -32,7 +32,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import okhttp3.Headers;
-//The search fragment allows the user to searchh for recipes by entering some ingredients into a searchbar.
+//The search fragment allows the user to search for dishes by entering some ingredients into a searchbar.
+//TODO: Cleanup debug lines (log statements and commented out code)
 public class SearchFragment extends Fragment {
     public static final String APP_ID = "5420521";
     public static final String API_KEY = "960b664e1bmsh613e17b2b2ceab3p1a2fe3jsnce5dbacacf52";
@@ -70,7 +71,6 @@ public class SearchFragment extends Fragment {
         // Set layout manager to position the items
         recyclerViewRecipes.setLayoutManager(new LinearLayoutManager(getContext()));
         Log.i(TAG, "hi2");
-        //creating an instance of AsyncHttpClient
 
         //Get data from the searchView & query the API to get the results (Recipes)
         final SearchView searchView = view.findViewById(R.id.search_view);
@@ -92,6 +92,7 @@ public class SearchFragment extends Fragment {
     }
 
     public void fetchRecipes(String query) {
+        //creating an instance of AsyncHttpClient
         AsyncHttpClient client = new AsyncHttpClient();
         Log.i(TAG, "query" + query);
         RequestParams params = new RequestParams();

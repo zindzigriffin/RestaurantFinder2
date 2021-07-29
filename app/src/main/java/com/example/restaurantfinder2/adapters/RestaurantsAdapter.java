@@ -26,10 +26,12 @@ import org.jetbrains.annotations.NotNull;
 import org.json.JSONException;
 
 import java.util.List;
-//This class
+//This is the restaurants adapter class that binds each item to it's recyclerView.
+//Makes the view for each item in the data set.
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
     Context mContext;
     List<Restaurants> mRestaurant;
+    public static final String TAG = "RestaurantsAdapter";
 
 
     public RestaurantsAdapter(Context context, List<Restaurants> restaurant) {
@@ -100,12 +102,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
 
                     //ParseObject object = new ParseObject("Like");
                     Restaurants object = new Restaurants();
-//                    object.put("username",ParseUser.getCurrentUser());
-//                    object.put("image_url", restaurant.getImageUrl());
-//                    object.put("id", restaurant.getId());
                     object.setParseId(restaurant.getId());
                     object.setParseImageUrl(restaurant.getImageUrl());
-                    //object.put("image_id",restaurant.getImageUrl());
                     Toast.makeText(mContext, "Restaurant ID" + restaurant.getImageUrl(), Toast.LENGTH_SHORT).show();
                     object.saveInBackground(new SaveCallback() {
                         @Override
@@ -114,6 +112,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                                 Toast.makeText(mContext, "Object saved!", Toast.LENGTH_SHORT).show();
                                 object.setParseId(restaurant.getId());
                                 object.setParseImageUrl(restaurant.getImageUrl());
+
                             } else {
                                 Log.e("XXX", "Object not saved",e );
                                 Toast.makeText(mContext, "Object not saved!", Toast.LENGTH_SHORT).show();

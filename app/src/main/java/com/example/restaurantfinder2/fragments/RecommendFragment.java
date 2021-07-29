@@ -33,11 +33,13 @@ import java.util.List;
 
 import okhttp3.Headers;
 
-//The recommend fragment will allow the user to view recommended restaurants based on preferences such as cuisine type and other amenities (outdoor/dining).
+//The recommend fragment will allow the user to view recommended restaurants based on preferences such as cuisine type, location, and price.
+//TODO: Clean up debug lines (log statmements and toast statements)
+//TODO: Implement the recommend by category functionality
+//TODO: Unhardcode the lcoation
 public class RecommendFragment extends Fragment{
 
     //Initialize variables
-
     public static final String BASE_URL = "https://api.yelp.com/v3/businesses/search?location=nyc";
     public static final String TAG = "RecommendFragment";
     public static final String finalToken = "PvwkfBvULdU-SXiMYBE6IDJQ8bNIKtZc0kHZ0CbUEOli3rMz0RprwInlAniV1G887HJvjOMjSs9K00fD8v627WbtZ5bxn5-qUXQ1rkXKpPXbXQ5aRF37LrDaluTtYHYx";
@@ -72,10 +74,12 @@ public class RecommendFragment extends Fragment{
         recyclerViewRecommendations.setLayoutManager(new LinearLayoutManager(getContext()));
         //Get data from the searchView & query the API to get the results (Recipes)
         final SearchView searchView = view.findViewById(R.id.search_view2);
+        //searchView listener that receives callbacks when the user performs actions in the searchView such as clicking on buttons or providing a query.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
             public boolean onQueryTextSubmit(String query) {
                 Log.d(TAG, "success!");
+                //calls the recipes api
                 fetchRecommended(query);
                 Toast.makeText(getContext(), "Location : " + query, Toast.LENGTH_SHORT).show();
                 return true;
@@ -88,7 +92,9 @@ public class RecommendFragment extends Fragment{
         });
 
     }
+    //Method to call recommended restaurants
     public void fetchRecommended(String query) {
+        //create an instance of the client
         AsyncHttpClient client = new AsyncHttpClient();
         Log.i(TAG, "query: " + query);
         RequestParams params = new RequestParams();
@@ -109,7 +115,9 @@ public class RecommendFragment extends Fragment{
                     JSONArray location = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Location" + location.toString());
                     List<Recommendations> recommendations = Recommendations.fromJSONArray(location);
+                    //add all of the recommended restaurants to the arrayList
                     recommendationsArrayList.addAll(recommendations);
+                    //notify the adapter that the data has changed
                     recommendationsAdapter.notifyDataSetChanged();
                     //recipesAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {

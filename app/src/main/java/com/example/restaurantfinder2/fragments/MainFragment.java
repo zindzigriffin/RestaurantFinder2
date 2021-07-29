@@ -36,6 +36,7 @@ import java.util.List;
 
 import okhttp3.Headers;
 //This fragment contains the user's main feed which is a list of restaurants and their attributes.
+//TODO: Cleanup debug lines and delete commented out code
 public class MainFragment extends Fragment {
     public static final String list_of_restaurants = "https://api.yelp.com/v3/businesses/search?term=food&location=San%20Francisco";
     public static final String TAG = "MainActivity";
@@ -132,7 +133,7 @@ public class MainFragment extends Fragment {
         //max_ID = restaurant.get(restaurant.size()-1);
     }
     //Method to make a network request to the yelp api
-    private void populateHomeTimeLine() {
+    public void populateHomeTimeLine() {
         AsyncHttpClient client = new AsyncHttpClient();
         RequestParams params = new RequestParams();
         params.put("limit", "25");

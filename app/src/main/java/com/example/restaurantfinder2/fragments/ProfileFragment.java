@@ -14,6 +14,7 @@ import com.example.restaurantfinder2.R;
 import org.jetbrains.annotations.NotNull;
 
 //The profile fragment will allow the user to view their profile and make changes such as edit their first and last name
+//TODO: Implement the edit profile funcitonality. Change password button is just there for aesthetic (does not work).
 public class ProfileFragment extends Fragment {
     public static final String TAG = "ProfileFragment";
 

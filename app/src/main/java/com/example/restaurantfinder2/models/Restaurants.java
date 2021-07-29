@@ -9,7 +9,7 @@ import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//This is the model class of the restaurants
 @ParseClassName("Like")
 public class Restaurants extends ParseObject {
     String alias;
@@ -17,7 +17,6 @@ public class Restaurants extends ParseObject {
     String name;
     String phone;
     String imageUrl;
-    //String price;
     String rating;
     JSONObject location;
 
