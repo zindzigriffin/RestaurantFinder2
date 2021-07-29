@@ -62,27 +62,25 @@ public class FavoritesFragment extends Fragment {
         recyclerViewItems.setLayoutManager(linearLayoutManager);
         restaurantsList = new ArrayList<>();
         restaurantsAdapter = new RestaurantsAdapter(getContext(), restaurantsList);
-        restaurantsAdapter = new RestaurantsAdapter(getContext(), restaurantsList);
         //find the recyclerView of the restaurants by ID
         recyclerViewFavorites = view.findViewById(R.id.rvFavorites);
         recyclerViewFavorites.setAdapter(restaurantsAdapter);
 
         ParseQuery<Restaurants> query = ParseQuery.getQuery("Like");
         query.whereEqualTo("username", ParseUser.getCurrentUser());
-        Restaurants object = new Restaurants();
+        //Restaurants object = new Restaurants();
         query.findInBackground(new FindCallback<Restaurants>() {
             @Override
             public void done(List<Restaurants> likes, ParseException e) {
                 if (e == null) {
                     Log.i(TAG, "Success: " + likes.toString());
-                    Toast.makeText(getContext(), "LIKE OBJECTS:" + likes.size(), Toast.LENGTH_SHORT).show();
-
+                    Toast.makeText(getContext(), "Number of likes:" + likes.size(), Toast.LENGTH_SHORT).show();
                     for (Restaurants restaurant : likes) {
                         Log.i(TAG, "Something: " + restaurant.getParseImageId());
-////                        restaurant.getParseImageId();
-////                        restaurant.getParseImageUrl();
+                        //Get a list of ID's and then query yelp api for each business and parse.
+//                        restaurant.getParseImageUrl();
 //                        restaurantsList.addAll(likes);
-//                        restaurantsAdapter.notifyDataSetChanged();
+                        restaurantsAdapter.notifyDataSetChanged();
 
                     }
                 } else {

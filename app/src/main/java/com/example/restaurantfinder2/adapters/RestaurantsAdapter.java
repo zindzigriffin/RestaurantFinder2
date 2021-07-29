@@ -94,13 +94,13 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             textViewAddress.setText(restaurant.getLocation().getString("address1"));
             textViewPhone.setText(restaurant.getPhone());
             textViewName.setText(restaurant.getName());
+
             Log.i("RestaurantsAdapter", restaurant.getName());
             Drawable drawable = imageViewHeart.getDrawable();
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
 
-                    //ParseObject object = new ParseObject("Like");
                     Restaurants object = new Restaurants();
                     object.setParseId(restaurant.getId());
                     object.setParseImageUrl(restaurant.getImageUrl());

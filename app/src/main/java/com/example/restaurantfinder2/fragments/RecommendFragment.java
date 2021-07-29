@@ -40,7 +40,7 @@ import okhttp3.Headers;
 public class RecommendFragment extends Fragment{
 
     //Initialize variables
-    public static final String BASE_URL = "https://api.yelp.com/v3/businesses/search?location=nyc";
+    public static final String BASE_URL = "https://api.yelp.com/v3/businesses/search";
     public static final String TAG = "RecommendFragment";
     public static final String finalToken = "PvwkfBvULdU-SXiMYBE6IDJQ8bNIKtZc0kHZ0CbUEOli3rMz0RprwInlAniV1G887HJvjOMjSs9K00fD8v627WbtZ5bxn5-qUXQ1rkXKpPXbXQ5aRF37LrDaluTtYHYx";
     public RecyclerView recyclerViewRecommendations;
@@ -99,6 +99,8 @@ public class RecommendFragment extends Fragment{
         Log.i(TAG, "query: " + query);
         RequestParams params = new RequestParams();
         params.put("limit", "25");
+        params.put("location", query);
+        params.put("categories", query);
         RequestHeaders header = new RequestHeaders();
         //inserting api as a header
         header.put("Authorization", "Bearer " + finalToken);
