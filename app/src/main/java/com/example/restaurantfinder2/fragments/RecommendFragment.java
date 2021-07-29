@@ -12,17 +12,24 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.widget.SearchView;
 import androidx.appcompat.widget.Toolbar;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.codepath.asynchttpclient.AsyncHttpClient;
 import com.codepath.asynchttpclient.RequestHeaders;
 import com.codepath.asynchttpclient.RequestParams;
 import com.codepath.asynchttpclient.callback.JsonHttpResponseHandler;
 import com.example.restaurantfinder2.R;
+import com.example.restaurantfinder2.adapters.RecommendationsAdapter;
+import com.example.restaurantfinder2.models.Recommendations;
 
 import org.jetbrains.annotations.NotNull;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import okhttp3.Headers;
 
@@ -34,6 +41,9 @@ public class RecommendFragment extends Fragment{
     public static final String BASE_URL = "https://api.yelp.com/v3/businesses/search?location=nyc";
     public static final String TAG = "RecommendFragment";
     public static final String finalToken = "PvwkfBvULdU-SXiMYBE6IDJQ8bNIKtZc0kHZ0CbUEOli3rMz0RprwInlAniV1G887HJvjOMjSs9K00fD8v627WbtZ5bxn5-qUXQ1rkXKpPXbXQ5aRF37LrDaluTtYHYx";
+    public RecyclerView recyclerViewRecommendations;
+    public RecommendationsAdapter recommendationsAdapter;
+    private ArrayList<Recommendations> recommendationsArrayList = new ArrayList<>();
     public RecommendFragment() {
         // Required empty public constructor
     }
@@ -53,7 +63,13 @@ public class RecommendFragment extends Fragment{
         super.onViewCreated(view, savedInstanceState);
         // Setting toolbar
         Toolbar toolbar = view.findViewById(R.id.toolbar);
-
+        recyclerViewRecommendations = view.findViewById(R.id.rvRecommend);
+        // Initialize the adapter
+        recommendationsAdapter = new RecommendationsAdapter(getContext(), recommendationsArrayList);
+        // Attach the adapter to the RecyclerView
+        recyclerViewRecommendations.setAdapter(recommendationsAdapter);
+        // Set layout manager to position the items
+        recyclerViewRecommendations.setLayoutManager(new LinearLayoutManager(getContext()));
         //Get data from the searchView & query the API to get the results (Recipes)
         final SearchView searchView = view.findViewById(R.id.search_view2);
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -92,9 +108,9 @@ public class RecommendFragment extends Fragment{
                     //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
                     JSONArray location = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Location" + location.toString());
-                   // List<Recipes> recipes = Recipes.fromJSONArray(location);
-//                    aRecipes.addAll(recipes);
-//                    recipesAdapter.notifyDataSetChanged();
+                    List<Recommendations> recommendations = Recommendations.fromJSONArray(location);
+                    recommendationsArrayList.addAll(recommendations);
+                    recommendationsAdapter.notifyDataSetChanged();
                     //recipesAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.e(TAG, "hit JSON Exception", e);

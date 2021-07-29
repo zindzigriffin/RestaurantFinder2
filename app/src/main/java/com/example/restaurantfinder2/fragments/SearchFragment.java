@@ -117,7 +117,7 @@ public class SearchFragment extends Fragment {
                     aRecipes.addAll(recipes);
                     recipesAdapter.notifyDataSetChanged();
                     Log.i(TAG, "Meals" + meals.toString());
-                    //recipesAdapter.notifyDataSetChanged();
+                    recipesAdapter.notifyDataSetChanged();
                 } catch (JSONException e) {
                     Log.e(TAG, "hit JSON Exception", e);
                     e.printStackTrace();
