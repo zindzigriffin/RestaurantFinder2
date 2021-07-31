@@ -36,7 +36,6 @@ import java.util.List;
 
 import okhttp3.Headers;
 //This fragment contains the user's main feed which is a list of restaurants and their attributes.
-//TODO: Cleanup debug lines and delete commented out code
 public class MainFragment extends Fragment {
     public static final String list_of_restaurants = "https://api.yelp.com/v3/businesses/search?term=food&location=San%20Francisco";
     public static final String TAG = "MainActivity";

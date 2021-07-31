@@ -1,19 +1,19 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".fragments.ProfileFragment">
 
-    <include layout="@layout/toolbar"/>
+    <include layout="@layout/toolbar" />
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:paddingTop="15dp" >
+        android:paddingTop="15dp">
 
         <com.mikhaellopez.circularimageview.CircularImageView
             android:layout_width="110dp"
@@ -23,112 +23,124 @@
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="8dp"
             android:text="Zindzi Griffin"
             android:textColor="@color/black"
             android:textSize="20dp"
-            android:layout_margin="8dp"
-            android:textStyle="bold"/>
+            android:textStyle="bold" />
+
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:layout_marginTop="10dp"/>
+            android:layout_marginTop="10dp" />
 
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical">
+            android:paddingRight="15dp">
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_person"/>
+                android:src="@drawable/ic_person" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="First Name"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:layout_marginLeft="5dp"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Zindzi"
                 android:layout_marginLeft="25dp"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+                android:text="Zindzi"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
 
 
         </LinearLayout>
+
         <View
             android:layout_width="match_parent"
             android:layout_height="0.5dp"
-            android:background="@android:color/darker_gray"
-            android:layout_marginTop="10dp"
             android:layout_marginLeft="15dp"
-            android:layout_marginRight="15dp"/>
+            android:layout_marginTop="10dp"
+            android:layout_marginRight="15dp"
+            android:background="@android:color/darker_gray" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center_vertical"
             android:orientation="horizontal"
             android:paddingLeft="15dp"
-            android:paddingRight="15dp"
-            android:layout_marginTop="20dp"
-            android:gravity="center_vertical">
+            android:paddingRight="15dp">
 
             <ImageView
                 android:layout_width="25dp"
                 android:layout_height="25dp"
-                android:src="@drawable/ic_person"/>
+                android:src="@drawable/ic_person" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
                 android:text="Last Name"
-                android:textStyle="bold"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:layout_marginLeft="5dp"/>
+                android:textStyle="bold" />
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Griffin"
                 android:layout_marginLeft="25dp"
-                android:textSize="18dp"
-                android:textColor="@color/black"/>
+                android:text="Griffin"
+                android:textColor="@color/black"
+                android:textSize="18dp" />
         </LinearLayout>
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="90dp"
             android:orientation="vertical">
-            <TextView
+
+            <Button
+                android:id="@+id/editProfile"
                 android:layout_width="150dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="-10dp"
                 android:background="@drawable/bg_btn"
+                android:drawableLeft="@drawable/ic_edit"
                 android:gravity="center"
+                android:paddingLeft="10dp"
                 android:text="Edit Profile"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                android:drawableLeft="@drawable/ic_edit"
-                android:paddingLeft="10dp"
-                android:layout_marginLeft="-10dp"/>
+                app:iconTint="#FCFCFC" />
+
             <TextView
                 android:layout_width="240dp"
                 android:layout_height="50dp"
+                android:layout_marginLeft="-10dp"
+                android:layout_marginTop="15dp"
                 android:background="@drawable/bg_btn"
+                android:drawableLeft="@drawable/ic_baseline_lock_24"
                 android:gravity="center"
+                android:paddingLeft="10dp"
                 android:text="Change Password"
                 android:textColor="@color/black"
-                android:textSize="18dp"
-                android:drawableLeft="@drawable/ic_baseline_lock_24"
-                android:paddingLeft="10dp"
-                android:layout_marginLeft="-10dp"
-                android:layout_marginTop="15dp" />
+                android:textSize="18dp" />
 
 
         </LinearLayout>

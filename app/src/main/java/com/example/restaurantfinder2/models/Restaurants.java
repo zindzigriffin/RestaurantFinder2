@@ -10,6 +10,7 @@ import org.json.JSONObject;
 import java.util.ArrayList;
 import java.util.List;
 //This is the model class of the restaurants
+//@Parcel(analyze = Restaurants.class)
 @ParseClassName("Like")
 public class Restaurants extends ParseObject {
     String alias;
@@ -23,6 +24,8 @@ public class Restaurants extends ParseObject {
     public static final String KEY_PARSE_IMAGE_ID = "image_id";
     public static final String KEY_PARSE_ID = "restaurant_id";
     public static final String KEY_PARSE_IMAGE_URL = "image_url";
+    public static final String KEY_PARSE_LOCATION = "location";
+    public static final String KEY_PARSE_PHONE = "phone";
 
 
     public Restaurants () {}
@@ -38,6 +41,9 @@ public class Restaurants extends ParseObject {
         rating = jsonObject.getString("rating");
         location = jsonObject.getJSONObject("location");
         String address1 = location.getString("address1");
+        put("name", jsonObject.getString("name"));
+        put("image_url", jsonObject.getString("image_url"));
+
     }
     //iterating through the list of restaurants and constructing an element for each restaurant in the JSON array
     public static List<Restaurants> fromJSONArray(JSONArray restaurantsJsonArray) throws JSONException {
@@ -58,7 +64,7 @@ public class Restaurants extends ParseObject {
     }
 
     public String getName() {
-        return name;
+        return getString("name");
     }
 
     public String getPhone() {
@@ -66,7 +72,7 @@ public class Restaurants extends ParseObject {
     }
 
     public String getImageUrl() {
-        return imageUrl;
+        return getString("image_url");
     }
 
     public String getRating() {
@@ -74,7 +80,7 @@ public class Restaurants extends ParseObject {
     }
 
     public JSONObject getLocation() {
-        return location;
+        return getJSONObject("location");
     }
 
     public String getParseImageId () {
@@ -85,10 +91,16 @@ public class Restaurants extends ParseObject {
         return getString(KEY_PARSE_ID);
     }
 
+
+    public Object getKeyParseLocation() {return getParseObject(KEY_PARSE_LOCATION);}
     public String getParseImageUrl () {
         return getString(KEY_PARSE_IMAGE_URL);
     }
 
+    public void setParseLocation(ParseObject location){
+        put(KEY_PARSE_LOCATION, location);
+
+    }
     public void setParseImageId (String imageId) {
         put(KEY_PARSE_IMAGE_ID, imageId);
     }

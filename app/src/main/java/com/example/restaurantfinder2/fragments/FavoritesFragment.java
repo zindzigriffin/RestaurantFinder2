@@ -37,6 +37,7 @@ public class FavoritesFragment extends Fragment {
     private int pager;
     public RecyclerView recyclerViewFavorites;
 
+
     public FavoritesFragment() {
         // Required empty public constructor
     }
@@ -61,25 +62,24 @@ public class FavoritesFragment extends Fragment {
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewItems.setLayoutManager(linearLayoutManager);
         restaurantsList = new ArrayList<>();
+        List<Restaurants> likes = new ArrayList<>();
         restaurantsAdapter = new RestaurantsAdapter(getContext(), restaurantsList);
         //find the recyclerView of the restaurants by ID
         recyclerViewFavorites = view.findViewById(R.id.rvFavorites);
         recyclerViewFavorites.setAdapter(restaurantsAdapter);
-
         ParseQuery<Restaurants> query = ParseQuery.getQuery("Like");
         query.whereEqualTo("username", ParseUser.getCurrentUser());
-        //Restaurants object = new Restaurants();
+        Restaurants restaurants = new Restaurants();
         query.findInBackground(new FindCallback<Restaurants>() {
             @Override
             public void done(List<Restaurants> likes, ParseException e) {
+                //empty constructor to create a new post
+                //Restaurants restaurants = new Restaurants();
                 if (e == null) {
                     Log.i(TAG, "Success: " + likes.toString());
-                    Toast.makeText(getContext(), "Number of likes:" + likes.size(), Toast.LENGTH_SHORT).show();
+                   Log.d(TAG, "Number of likes: " +likes.size());
                     for (Restaurants restaurant : likes) {
-                        Log.i(TAG, "Something: " + restaurant.getParseImageId());
-                        //Get a list of ID's and then query yelp api for each business and parse.
-//                        restaurant.getParseImageUrl();
-//                        restaurantsList.addAll(likes);
+                        restaurantsList.addAll(likes);
                         restaurantsAdapter.notifyDataSetChanged();
 
                     }

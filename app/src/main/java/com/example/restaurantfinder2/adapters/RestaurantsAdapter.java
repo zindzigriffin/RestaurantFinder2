@@ -91,8 +91,8 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         //Binds the data from the adapter to the recyclerView
         public void bind(Restaurants restaurant) throws JSONException{
             Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);
-            textViewAddress.setText(restaurant.getLocation().getString("address1"));
-            textViewPhone.setText(restaurant.getPhone());
+            //textViewAddress.setText(restaurant.getLocation().getString("address1"));
+            //textViewPhone.setText(restaurant.getPhone());
             textViewName.setText(restaurant.getName());
 
             Log.i("RestaurantsAdapter", restaurant.getName());
@@ -101,17 +101,20 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                 @Override
                 public void onClick(View v) {
 
-                    Restaurants object = new Restaurants();
-                    object.setParseId(restaurant.getId());
-                    object.setParseImageUrl(restaurant.getImageUrl());
+//                    Restaurants object = new Restaurants();
+//                    object.setParseId(restaurant.getId());
+//                    object.setParseImageUrl(restaurant.getImageUrl());
+//                    object.setParseId(restaurant.getParseId());
+//                    object.setParseImageId(restaurant.getParseImageId());
+
                     Toast.makeText(mContext, "Restaurant ID" + restaurant.getImageUrl(), Toast.LENGTH_SHORT).show();
-                    object.saveInBackground(new SaveCallback() {
+                    restaurant.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
                             if(e==null) {
                                 Toast.makeText(mContext, "Object saved!", Toast.LENGTH_SHORT).show();
-                                object.setParseId(restaurant.getId());
-                                object.setParseImageUrl(restaurant.getImageUrl());
+//                                restaurant.setParseId(restaurant.getId());
+//                                o.setParseImageUrl(restaurant.getImageUrl());
 
                             } else {
                                 Log.e("XXX", "Object not saved",e );

@@ -116,7 +116,10 @@ public class RecommendFragment extends Fragment{
                     //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
                     JSONArray location = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Location" + location.toString());
+
                     List<Recommendations> recommendations = Recommendations.fromJSONArray(location);
+                    //insert a loop to loop through the recommendation
+
                     //add all of the recommended restaurants to the arrayList
                     recommendationsArrayList.addAll(recommendations);
                     //notify the adapter that the data has changed

@@ -37,7 +37,7 @@ import okhttp3.Headers;
 public class SearchFragment extends Fragment {
     public static final String APP_ID = "5420521";
     public static final String API_KEY = "960b664e1bmsh613e17b2b2ceab3p1a2fe3jsnce5dbacacf52";
-    public static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/filter.php?i=chicken_breast";
+    public static final String BASE_URL = "https://www.themealdb.com/api/json/v1/1/filter.php";
     public static final String TAG = "SearchFragment";
     public RecyclerView recyclerViewRecipes;
     public RecipesAdapter recipesAdapter;
