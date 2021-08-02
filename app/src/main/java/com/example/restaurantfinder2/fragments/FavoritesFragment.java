@@ -30,11 +30,11 @@ import java.util.List;
 //The favorites fragment will store the user's favorite restaurants which will be acquired when the user clicks on the save button in the main fragment.
 //TODO: Cleanup debug lines and fix null object reference errors
 public class FavoritesFragment extends Fragment {
+    //Initialize the variables
     private static final String TAG = "FavoritesFragment";
     private RestaurantsAdapter restaurantsAdapter;
     private List<Restaurants> restaurantsList;
     private Context mContext;
-    private int pager;
     public RecyclerView recyclerViewFavorites;
 
 
@@ -69,17 +69,18 @@ public class FavoritesFragment extends Fragment {
         recyclerViewFavorites.setAdapter(restaurantsAdapter);
         ParseQuery<Restaurants> query = ParseQuery.getQuery("Like");
         query.whereEqualTo("username", ParseUser.getCurrentUser());
-        Restaurants restaurants = new Restaurants();
         query.findInBackground(new FindCallback<Restaurants>() {
             @Override
             public void done(List<Restaurants> likes, ParseException e) {
                 //empty constructor to create a new post
-                //Restaurants restaurants = new Restaurants();
+                Restaurants restaurants = new Restaurants();
                 if (e == null) {
                     Log.i(TAG, "Success: " + likes.toString());
                    Log.d(TAG, "Number of likes: " +likes.size());
                     for (Restaurants restaurant : likes) {
+                        //add all of the liked content to the list
                         restaurantsList.addAll(likes);
+                        //notify the adapter that the data set has changed
                         restaurantsAdapter.notifyDataSetChanged();
 
                     }
