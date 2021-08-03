@@ -59,10 +59,11 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvFirstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text="Zindzi"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
@@ -101,10 +102,11 @@
                 android:textStyle="bold" />
 
             <TextView
+                android:id="@+id/tvLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text="Griffin"
+                android:text=""
                 android:textColor="@color/black"
                 android:textSize="18dp" />
         </LinearLayout>

@@ -91,7 +91,9 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         //Binds the data from the adapter to the recyclerView
         public void bind(Restaurants restaurant) throws JSONException{
             Glide.with(mContext).load(restaurant.getImageUrl()).into(imageView);
-            //textViewAddress.setText(restaurant.getLocation().getString("address1"));
+            if(restaurant.getLocation() != null) {
+                textViewAddress.setText(restaurant.getLocation().getString("address1"));
+            }
             //textViewPhone.setText(restaurant.getPhone());
             textViewName.setText(restaurant.getName());
 

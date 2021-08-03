@@ -80,7 +80,7 @@ public class Restaurants extends ParseObject {
     }
 
     public JSONObject getLocation() {
-        return getJSONObject("location");
+        return location;
     }
 
     public String getParseImageId () {

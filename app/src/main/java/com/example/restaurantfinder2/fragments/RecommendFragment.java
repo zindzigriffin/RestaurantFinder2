@@ -74,6 +74,7 @@ public class RecommendFragment extends Fragment{
         recyclerViewRecommendations.setLayoutManager(new LinearLayoutManager(getContext()));
         //Get data from the searchView & query the API to get the results (Recipes)
         final SearchView searchView = view.findViewById(R.id.search_view2);
+
         //searchView listener that receives callbacks when the user performs actions in the searchView such as clicking on buttons or providing a query.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
             @Override
@@ -84,6 +85,7 @@ public class RecommendFragment extends Fragment{
                 Toast.makeText(getContext(), "Location : " + query, Toast.LENGTH_SHORT).show();
                 return true;
             }
+
 
             @Override
             public boolean onQueryTextChange(String newText) {
@@ -98,9 +100,8 @@ public class RecommendFragment extends Fragment{
         AsyncHttpClient client = new AsyncHttpClient();
         Log.i(TAG, "query: " + query);
         RequestParams params = new RequestParams();
-        params.put("limit", "25");
         params.put("location", query);
-        params.put("category", query);
+        params.put("radius", "");
         RequestHeaders header = new RequestHeaders();
         //inserting api as a header
         header.put("Authorization", "Bearer " + finalToken);
@@ -116,10 +117,7 @@ public class RecommendFragment extends Fragment{
                     //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
                     JSONArray location = jsonObject.getJSONArray("businesses");
                     Log.i(TAG, "Location" + location.toString());
-
                     List<Recommendations> recommendations = Recommendations.fromJSONArray(location);
-                    //insert a loop to loop through the recommendation
-
                     //add all of the recommended restaurants to the arrayList
                     recommendationsArrayList.addAll(recommendations);
                     //notify the adapter that the data has changed
@@ -133,7 +131,7 @@ public class RecommendFragment extends Fragment{
 
             @Override
             public void onFailure(int statusCode, Headers headers, String response, Throwable throwable) {
-                Log.d(TAG, "onFailure");
+                Log.d(TAG, "onFailure" + statusCode + response);
 
             }
         });

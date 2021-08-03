@@ -1,8 +1,6 @@
 package com.example.restaurantfinder2.fragments;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,7 +11,8 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.restaurantfinder2.R;
-import com.example.restaurantfinder2.activities.EditProfile;
+import com.example.restaurantfinder2.activities.MainActivity;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -37,24 +36,30 @@ public class ProfileFragment extends Fragment {
 
         return view;
     }
+
     //This event is triggered soon after onCreateView();
     //Any view setup should occur here
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         editprofile = view.findViewById(R.id.editProfile);
+//
+//        //create an instance of a ParseUser
+//        ParseUser user = new ParseUser();
+//        user.getUsername();
+//
+//        final TextView firstNameTextView = view.findViewById(R.id.tvFirstName);
+//        final TextView lastNameTextView = view.findViewById(R.id.tvLastName);
+//
+//        // Add clickListener to modify the first name of the user
+//        firstNameTextView.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//
+//            }
+//        });
 
-        //setup an on click listener for the editProfile
-        editprofile.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Log.d(TAG, "edit profile button clicked");
-                Intent i = new Intent(v.getContext(), EditProfile.class);
-                i.putExtra("firstname", "z");
-                i.putExtra("lastname","griffin");
-                startActivity(i);
+        ParseUser myparseUser = ((MainActivity) getActivity()).parseUser;
 
-            }
-        });
     }
 }

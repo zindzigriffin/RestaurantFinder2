@@ -16,6 +16,7 @@ import com.example.restaurantfinder2.fragments.ProfileFragment;
 import com.example.restaurantfinder2.fragments.RecommendFragment;
 import com.example.restaurantfinder2.fragments.SearchFragment;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -26,6 +27,7 @@ public class MainActivity extends AppCompatActivity {
     //handles transition from one fragment to another
     FragmentManager fragmentManager = getSupportFragmentManager();
     BottomNavigationView navigationView;
+    public ParseUser parseUser;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
