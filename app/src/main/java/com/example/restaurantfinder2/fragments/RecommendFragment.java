@@ -46,6 +46,9 @@ public class RecommendFragment extends Fragment{
     public RecyclerView recyclerViewRecommendations;
     public RecommendationsAdapter recommendationsAdapter;
     private ArrayList<Recommendations> recommendationsArrayList = new ArrayList<>();
+//    public Spinner priceSpinner;
+//    private ArrayList<Recommendations> pricesList = new ArrayList<Recommendations>();
+//    ArrayAdapter<String> priceListAdapter;
     public RecommendFragment() {
         // Required empty public constructor
     }
@@ -74,6 +77,7 @@ public class RecommendFragment extends Fragment{
         recyclerViewRecommendations.setLayoutManager(new LinearLayoutManager(getContext()));
         //Get data from the searchView & query the API to get the results (Recipes)
         final SearchView searchView = view.findViewById(R.id.search_view2);
+        //priceSpinner = view.findViewById(R.id.spinnerPrice);
 
         //searchView listener that receives callbacks when the user performs actions in the searchView such as clicking on buttons or providing a query.
         searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
@@ -98,10 +102,11 @@ public class RecommendFragment extends Fragment{
     public void fetchRecommended(String query) {
         //create an instance of the client
         AsyncHttpClient client = new AsyncHttpClient();
-        Log.i(TAG, "query: " + query);
+        Log.i(TAG, "query:" + query);
         RequestParams params = new RequestParams();
-        params.put("location", query);
-        params.put("radius", "");
+        params.put("location",query);
+        params.put("price",2);
+        params.put("radius","200");
         RequestHeaders header = new RequestHeaders();
         //inserting api as a header
         header.put("Authorization", "Bearer " + finalToken);
@@ -112,11 +117,10 @@ public class RecommendFragment extends Fragment{
                 //printing onSuccess if response is successful
                 Log.d(TAG, "yay");
                 JSONObject jsonObject = json.jsonObject;
-                Log.i(TAG, "location1");
                 try {
-                    //Returns the value mapped by name if it exists and is a JSONArray, or throws otherwise.
+                    //Returns the value mapped by name if it exists and is a JSONArray, or throws an exception otherwise.
                     JSONArray location = jsonObject.getJSONArray("businesses");
-                    Log.i(TAG, "Location" + location.toString());
+                    Log.i(TAG, "Recommendations" + location.toString());
                     List<Recommendations> recommendations = Recommendations.fromJSONArray(location);
                     //add all of the recommended restaurants to the arrayList
                     recommendationsArrayList.addAll(recommendations);

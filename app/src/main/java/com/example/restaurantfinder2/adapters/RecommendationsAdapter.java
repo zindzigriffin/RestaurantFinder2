@@ -73,6 +73,7 @@ public class RecommendationsAdapter extends RecyclerView.Adapter<Recommendations
         public TextView textViewRecommendName;
         public TextView textViewRecommendAddress;
         public TextView textViewRecommendCity;
+        public TextView textViewPrice;
 
         public ViewHolder(@NonNull @NotNull View itemView, OnItemClickListener listener) {
             // Stores the itemView in a public final member variable that can be used
@@ -83,6 +84,7 @@ public class RecommendationsAdapter extends RecyclerView.Adapter<Recommendations
             textViewRecommendName = (TextView)itemView.findViewById(R.id.tvRecommendName);
             textViewRecommendAddress = (TextView)itemView.findViewById(R.id.tvRecommendAddress);
             textViewRecommendCity = (TextView)itemView.findViewById(R.id.tvRecommendCity);
+            textViewPrice = (TextView)itemView.findViewById(R.id.tvPrice);
 
         }
         public void bind (Recommendations recommendations) throws JSONException {
@@ -90,6 +92,7 @@ public class RecommendationsAdapter extends RecyclerView.Adapter<Recommendations
             textViewRecommendName.setText(recommendations.getName());
             textViewRecommendAddress.setText(recommendations.getLocation().getString("address1"));
             textViewRecommendCity.setText(recommendations.getLocation().getString("address1"));
+            textViewPrice.setText(recommendations.getPrice());
             Glide.with(mContext).load(recommendations.getImageUrl()).into(imageViewRecommendImage);
 
         }

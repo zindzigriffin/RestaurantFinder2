@@ -12,12 +12,14 @@ public class Recommendations {
     JSONObject address;
     String image;
     String name;
+    String price;
 
     //Construct a restaurant object
     public Recommendations(JSONObject jsonObject) throws JSONException {
         name = jsonObject.getString("name");
         image = jsonObject.getString("image_url");
         address = jsonObject.getJSONObject("location");
+        price = jsonObject.getString("price");
         String address1 = address.getString("address1");
     }
 
@@ -37,8 +39,12 @@ public class Recommendations {
 
         return name;
     }
+    public String getPrice(){
+        return price;
+    }
     public JSONObject getLocation() {
         return address;
     }
+
 
 }
