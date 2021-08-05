@@ -5,22 +5,27 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.EditText;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.restaurantfinder2.R;
-import com.example.restaurantfinder2.activities.MainActivity;
-import com.parse.ParseUser;
 
 import org.jetbrains.annotations.NotNull;
 
-//The profile fragment will allow the user to view their profile and make changes such as edit their first and last name
-//TODO: Implement the edit profile functionality. Change password button is just there for aesthetic (does not work).
+//The profile fragment will allow the user to view their profile and make changes such as edit their first and last name.
 public class ProfileFragment extends Fragment {
+    //Declare variables
     public static final String TAG = "ProfileFragment";
-    private Button editprofile;
+    private Button mEditprofile;
+    public EditText firstNameEditText;
+    public EditText lastNameEditText;
+    public TextView textViewNames;
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -39,27 +44,35 @@ public class ProfileFragment extends Fragment {
 
     //This event is triggered soon after onCreateView();
     //Any view setup should occur here
+    //This is the method where any view lookups and attaching listeners are used
     @Override
     public void onViewCreated(@NonNull @NotNull View view, @Nullable @org.jetbrains.annotations.Nullable Bundle savedInstanceState) {
+        //Called immediately after onCreateView(LayoutInflater, ViewGroup, Bundle) has returned, but before any saved state has been restored in to the view
+        //Initialize variables used in this class
         super.onViewCreated(view, savedInstanceState);
-        editprofile = view.findViewById(R.id.editProfile);
-//
-//        //create an instance of a ParseUser
-//        ParseUser user = new ParseUser();
-//        user.getUsername();
-//
-//        final TextView firstNameTextView = view.findViewById(R.id.tvFirstName);
-//        final TextView lastNameTextView = view.findViewById(R.id.tvLastName);
-//
-//        // Add clickListener to modify the first name of the user
-//        firstNameTextView.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//
-//            }
-//        });
+        mEditprofile = view.findViewById(R.id.editProfile);
+        final EditText firstNameEditText = view.findViewById(R.id.etFirstName);
+        final EditText lastNameEditText= view.findViewById(R.id.etLastName);
+        final TextView textViewNames = view.findViewById(R.id.tvNames);
 
-        ParseUser myparseUser = ((MainActivity) getActivity()).parseUser;
 
+            // Add a clickListener on the edit profile to modify the first and last name of the user
+            mEditprofile.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Toast.makeText(getContext(), "Clicked First Name", Toast.LENGTH_LONG).show();
+                    //return the text of the firstname that the textView is displaying as a string
+                    String newText = firstNameEditText.getText().toString();
+                    //return the text of the lastname that the textView is displaying as a string
+                    String newText1 = lastNameEditText.getText().toString();
+                    //set the text of whatever the user types in for the first name and lastname
+                    textViewNames.setText("Welcome: "+ newText + " "+ newText1);
+                    //toast message for the user to see that the data is saved
+                    Toast.makeText(getContext(), "Hi" + newText + newText1, Toast.LENGTH_LONG).show();
+
+                }
+            });
+
+
+        }
     }
-}

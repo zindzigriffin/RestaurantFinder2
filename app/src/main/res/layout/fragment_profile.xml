@@ -21,10 +21,10 @@
             android:src="@drawable/zindzi" />
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:id="@+id/tvNames"
+            android:layout_width="179dp"
+            android:layout_height="49dp"
             android:layout_margin="8dp"
-            android:text="Zindzi Griffin"
             android:textColor="@color/black"
             android:textSize="20dp"
             android:textStyle="bold" />
@@ -58,12 +58,14 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvFirstName"
+            <EditText
+                android:id="@+id/etFirstName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text=""
+                android:enabled="true"
+                android:clickable="true"
+                android:text="First Name"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
 
@@ -101,14 +103,17 @@
                 android:textSize="18dp"
                 android:textStyle="bold" />
 
-            <TextView
-                android:id="@+id/tvLastName"
+            <EditText
+                android:id="@+id/etLastName"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="25dp"
-                android:text=""
+                android:text="Last Name"
+                android:enabled="true"
+                android:clickable="true"
                 android:textColor="@color/black"
                 android:textSize="18dp" />
+
         </LinearLayout>
 
         <LinearLayout
@@ -126,10 +131,10 @@
                 android:drawableLeft="@drawable/ic_edit"
                 android:gravity="center"
                 android:paddingLeft="10dp"
-                android:text="Edit Profile"
+                android:text="Save"
                 android:textColor="@color/black"
                 android:textSize="18dp"
-                app:iconTint="#FCFCFC" />
+                app:iconTint="@color/white" />
 
             <TextView
                 android:layout_width="240dp"
@@ -149,5 +154,6 @@
 
 
     </LinearLayout>
+
 
 </LinearLayout>
