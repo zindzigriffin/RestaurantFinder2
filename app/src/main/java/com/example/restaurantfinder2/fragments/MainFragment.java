@@ -41,7 +41,7 @@ public class MainFragment extends Fragment {
     public static final String TAG = "MainActivity";
     public static final String finalToken = "PvwkfBvULdU-SXiMYBE6IDJQ8bNIKtZc0kHZ0CbUEOli3rMz0RprwInlAniV1G887HJvjOMjSs9K00fD8v627WbtZ5bxn5-qUXQ1rkXKpPXbXQ5aRF37LrDaluTtYHYx";
     List<Restaurants> restaurant;
-    private RecyclerView rvRestaurants;
+    private RecyclerView recyclerViewRestaurants;
     private RestaurantsAdapter restaurantsAdapter;
 
     Button logoutButton;
@@ -91,7 +91,7 @@ public class MainFragment extends Fragment {
                 android.R.color.holo_red_light);
 
         //find the recyclerView of the restaurants by ID
-        rvRestaurants = view.findViewById(R.id.rvRestaurants);
+        recyclerViewRestaurants= view.findViewById(R.id.rvRestaurants);
         //create an arrayList of restaurants
         restaurant = new ArrayList<>();
         //find the logout button by ID
@@ -99,9 +99,9 @@ public class MainFragment extends Fragment {
         //Create the adapter
         restaurantsAdapter = new RestaurantsAdapter(getContext(), restaurant);
         //Set the layout manager on the recyclerView
-        rvRestaurants.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerViewRestaurants.setLayoutManager(new LinearLayoutManager(getContext()));
         //Set the adapter on the recyclerView
-        rvRestaurants.setAdapter(restaurantsAdapter);
+        recyclerViewRestaurants.setAdapter(restaurantsAdapter);
         //onClick listener for the user to logout and return to the sign in screen
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -121,7 +121,7 @@ public class MainFragment extends Fragment {
             }
         };
         // Adds the scroll listener to RecyclerView
-        rvRestaurants.addOnScrollListener(mScrollListener);
+        recyclerViewRestaurants.addOnScrollListener(mScrollListener);
 
     }
     // Append the next page of data into the adapter

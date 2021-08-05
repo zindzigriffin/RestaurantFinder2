@@ -33,7 +33,6 @@ import java.util.List;
 
 import okhttp3.Headers;
 //The search fragment allows the user to search for dishes by entering some ingredients into a searchbar.
-//TODO: Cleanup debug lines (log statements and commented out code)
 public class SearchFragment extends Fragment {
     //Declare variables
     public static final String APP_ID = "5420521";
