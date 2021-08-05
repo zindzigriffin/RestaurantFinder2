@@ -22,7 +22,8 @@ import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.jetbrains.annotations.NotNull;
 
-//The profile fragment will allow the user to edit and view their profile
+//The profile fragment will allow the user to edit and view their profile.
+//The user can also change their profile picture by choosing from their gallery or uploading an image from the camera.
 public class ProfileFragment extends Fragment {
     //Declare variables
     public static final String TAG = "ProfileFragment";
@@ -30,8 +31,8 @@ public class ProfileFragment extends Fragment {
     public EditText firstNameEditText;
     public EditText lastNameEditText;
     public TextView textViewNames;
-    CircularImageView cover;
-    FloatingActionButton fab;
+    CircularImageView mCover;
+    FloatingActionButton mFab;
 
 
     public ProfileFragment() {
@@ -45,8 +46,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-        cover = view.findViewById(R.id.coverImg);
-        fab = view.findViewById(R.id.floatingActionButton2);
+        mCover = view.findViewById(R.id.coverImg);
+        mFab = view.findViewById(R.id.floatingActionButton2);
         return view;
     }
 
@@ -81,7 +82,7 @@ public class ProfileFragment extends Fragment {
                 }
             });
             //set an onclick listener to the floating action button
-            fab.setOnClickListener(new View.OnClickListener() {
+            mFab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
                     //Utilize the image picker library that allows users to capture images using the camera or gallery
@@ -108,7 +109,7 @@ public class ProfileFragment extends Fragment {
             // data – An Intent, which can return result data to the calle
             Uri uri = data.getData();
             //Sets the content of this ImageView to the specified Uri.
-            cover.setImageURI(uri);
+            mCover.setImageURI(uri);
 
     }
 }
