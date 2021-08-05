@@ -84,6 +84,7 @@ public class ProfileFragment extends Fragment {
             fab.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
+                    //Utilize the image picker library that allows users to capture images using the camera or gallery
                     ImagePicker.Companion.with(ProfileFragment.this)
                             //Crop image(Optional), Check Customization for more option
                             .crop()
