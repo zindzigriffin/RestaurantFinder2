@@ -100,6 +100,7 @@ public class RecommendFragment extends Fragment {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 //get the item at a specific position and return a string representation of the object and set it to price
                 mCuisine = parent.getItemAtPosition(position).toString();
+
             }
             //Callback method to be invoked when the selection disappears from this view.
             @Override
@@ -122,7 +123,7 @@ public class RecommendFragment extends Fragment {
                 //get the data corresponding to the currently selected item
                 spinner.getSelectedItem();
                 //call the fetch recommended method
-                fetchRecommended(spinner, spinner_cuisine);
+                //fetchRecommended();
                 //toast message to let the user know what items they have selected
                 Toast.makeText(getContext(),
                         "OnClickListener : " +
@@ -186,7 +187,7 @@ public class RecommendFragment extends Fragment {
                 //calls the recipes api
                 //set the instance variable named query to the parameter
                 RecommendFragment.this.mQuery = query;
-                //fetchRecommended();
+                fetchRecommended(mQuery);
                 Toast.makeText(getContext(), "Location : " + query, Toast.LENGTH_SHORT).show();
                 return true;
             }
@@ -201,18 +202,19 @@ public class RecommendFragment extends Fragment {
 
     }
     //Method to call recommended restaurants
-    public void fetchRecommended(Spinner spinner, Spinner spinner_cuisine) {
+    public void fetchRecommended(String mQuery) {
         //create an instance of the client
         AsyncHttpClient client = new AsyncHttpClient();
         Log.i(TAG, "query:" + mQuery);
         RequestParams params = new RequestParams();
         params.put("location",mQuery);
         params.put("radius","200");
+        params.put("price", 2);
         if(mCuisine !=null){
-            params.put("categories", String.valueOf(spinner_cuisine));
+            params.put("categories", String.valueOf(mCuisine));
         }
         if(mPrice !=null){
-            params.put("price", String.valueOf(spinner));
+            params.put("price", String.valueOf(mPrice));
         }
         RequestHeaders header = new RequestHeaders();
         //inserting api as a header
