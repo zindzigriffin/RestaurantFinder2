@@ -13,6 +13,7 @@ public class Recommendations {
     String image;
     String name;
     String price;
+    String genres;
 
     //Construct a restaurant object
     public Recommendations(JSONObject jsonObject) throws JSONException {
@@ -20,6 +21,7 @@ public class Recommendations {
         image = jsonObject.getString("image_url");
         address = jsonObject.getJSONObject("location");
         price = jsonObject.getString("price");
+        genres = jsonObject.getString("categories");
         String address1 = address.getString("address1");
     }
 
@@ -38,6 +40,9 @@ public class Recommendations {
     public String getName() {
 
         return name;
+    }
+    public String getGenres(){
+        return genres;
     }
     public String getPrice(){
         return price;
