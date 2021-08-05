@@ -1,5 +1,7 @@
 package com.example.restaurantfinder2.fragments;
 
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -14,6 +16,9 @@ import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
 
 import com.example.restaurantfinder2.R;
+import com.github.dhaval2404.imagepicker.ImagePicker;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
+import com.mikhaellopez.circularimageview.CircularImageView;
 
 import org.jetbrains.annotations.NotNull;
 
@@ -25,6 +30,8 @@ public class ProfileFragment extends Fragment {
     public EditText firstNameEditText;
     public EditText lastNameEditText;
     public TextView textViewNames;
+    CircularImageView cover;
+    FloatingActionButton fab;
 
 
     public ProfileFragment() {
@@ -38,7 +45,8 @@ public class ProfileFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        cover = view.findViewById(R.id.coverImg);
+        fab = view.findViewById(R.id.floatingActionButton2);
         return view;
     }
 
@@ -72,7 +80,34 @@ public class ProfileFragment extends Fragment {
 
                 }
             });
+            //set an onclick listener to the floating action button
+            fab.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    ImagePicker.Companion.with(ProfileFragment.this)
+                            //Crop image(Optional), Check Customization for more option
+                            .crop()
+                            //Final image size will be less than 1 MB(Optional)
+                            .compress(1024)
+                            //Final image resolution will be less than 1080 x 1080(Optional)
+                            .maxResultSize(1080, 1080)
+                            .start(20);
+
+
+                }
+            });
 
 
         }
+
+    @Override
+    public void onActivityResult(int requestCode, int resultCode, @Nullable @org.jetbrains.annotations.Nullable Intent data) {
+        super.onActivityResult(requestCode, resultCode, data);
+            // A URI reference includes a URI and a fragment, the component of the URI following a '#'.
+            // data – An Intent, which can return result data to the calle
+            Uri uri = data.getData();
+            //Sets the content of this ImageView to the specified Uri.
+            cover.setImageURI(uri);
+
     }
+}
