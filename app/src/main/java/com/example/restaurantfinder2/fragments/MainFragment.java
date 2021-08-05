@@ -49,7 +49,7 @@ public class MainFragment extends Fragment {
     private SwipeRefreshLayout mSwipeContainer;
     // Store a member variable for the listener
     private EndlessRecyclerViewScrollListener mScrollListener;
-    long max_ID;
+    Restaurants max_ID;
 
 
     public MainFragment() {
@@ -72,6 +72,8 @@ public class MainFragment extends Fragment {
         RecyclerView recyclerViewItems = (RecyclerView) view.findViewById(R.id.rvRestaurants);
         LinearLayoutManager linearLayoutManager = new LinearLayoutManager(getContext());
         recyclerViewItems.setLayoutManager(linearLayoutManager);
+        //calls the populatehome timeline method so data is already automatically loaded
+        populateHomeTimeLine();
         // Lookup the swipe container view
         mSwipeContainer = (SwipeRefreshLayout) view.findViewById(R.id.swipeContainer);
         //set the listener to be notified when a refresh is triggered via the swipe gesture.
@@ -129,7 +131,7 @@ public class MainFragment extends Fragment {
     public void loadNextDataFromApi(int page) {
         populateHomeTimeLine();
         //getting the last restaurant and setting it as the max_id
-        //max_ID = restaurant.get(restaurant.size()-1);
+        max_ID = restaurant.get(restaurant.size()-1);
     }
     //Method to make a network request to the yelp api
     public void populateHomeTimeLine() {

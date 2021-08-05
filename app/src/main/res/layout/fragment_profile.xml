@@ -136,11 +136,13 @@
                 android:layout_height="50dp"
                 android:layout_marginLeft="-10dp"
                 android:background="@drawable/bg_btn"
+                android:backgroundTint="@color/white"
                 android:drawableLeft="@drawable/ic_edit"
                 android:gravity="center"
                 android:paddingLeft="10dp"
                 android:text="Save"
                 android:textColor="@color/black"
+                android:textColorHint="#009C27B0"
                 android:textSize="18dp"
                 app:iconTint="@color/white" />
 

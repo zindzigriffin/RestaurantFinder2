@@ -19,7 +19,8 @@ import org.json.JSONException;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//This is the recommendations adapter that gets all the data needed for the recommendation fragment and binds it to the view
+//An Adapter wraps an existing class with a new interface so that it becomes compatible with the client's interface.
 public class RecommendationsAdapter extends RecyclerView.Adapter<RecommendationsAdapter.ViewHolder> {
     List<Recommendations> mRecommendations;
     public Context mContext;

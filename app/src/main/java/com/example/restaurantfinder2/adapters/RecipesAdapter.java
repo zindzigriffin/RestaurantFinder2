@@ -15,7 +15,7 @@ import com.example.restaurantfinder2.models.Recipes;
 
 import java.util.ArrayList;
 import java.util.List;
-
+//Recipes adater that gets all the data needed for the recipes and binds it to the view
 public class RecipesAdapter extends RecyclerView.Adapter<RecipesAdapter.ViewHolder> {
     List<Recipes> mRecipes;
     public Context mContext;
