@@ -29,11 +29,12 @@ import java.util.List;
 //This is the restaurants adapter class that binds each item to it's recyclerView.
 //Makes the view for each item in the data set.
 public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.ViewHolder> {
+    //Declare variables
     Context mContext;
     List<Restaurants> mRestaurant;
     public static final String TAG = "RestaurantsAdapter";
 
-
+    //Constructor of the restaurants adapter that takes in a context and a list of restaurants
     public RestaurantsAdapter(Context context, List<Restaurants> restaurant) {
         mContext= context;
         mRestaurant = restaurant;
@@ -62,14 +63,14 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             e.printStackTrace();
         }
     }
-
+    //Method to get the size of the restaurants list
     @Override
     public int getItemCount() {
         return mRestaurant.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        //Declare all the variables
         TextView textViewName;
         TextView textViewAddress;
         TextView textViewPhone;
@@ -77,8 +78,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
         ImageView imageViewHeart;
         AnimatedVectorDrawableCompat avd;
         AnimatedVectorDrawable avd2;
-        //TextView likeCountTextView;
-
+        //Initialize all the variables
         public ViewHolder(@NonNull @NotNull View itemView) {
             super(itemView);
             textViewName = itemView.findViewById(R.id.tvName);
@@ -94,29 +94,24 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
             if(restaurant.getLocation() != null) {
                 textViewAddress.setText(restaurant.getLocation().getString("address1"));
             }
-            //textViewPhone.setText(restaurant.getPhone());
+            //set the text of the restaurant name
             textViewName.setText(restaurant.getName());
 
             Log.i("RestaurantsAdapter", restaurant.getName());
+            //get the heart icon
             Drawable drawable = imageViewHeart.getDrawable();
+            //set an on click listener for the image
             imageView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View v) {
-
-//                    Restaurants object = new Restaurants();
-//                    object.setParseId(restaurant.getId());
-//                    object.setParseImageUrl(restaurant.getImageUrl());
-//                    object.setParseId(restaurant.getParseId());
-//                    object.setParseImageId(restaurant.getParseImageId());
-
                     Toast.makeText(mContext, "Restaurant ID" + restaurant.getImageUrl(), Toast.LENGTH_SHORT).show();
+                    //Saves this object to the server in a background thread.
                     restaurant.saveInBackground(new SaveCallback() {
                         @Override
                         public void done(ParseException e) {
                             if(e==null) {
+                                //toast to let the user know the object has been saved
                                 Toast.makeText(mContext, "Object saved!", Toast.LENGTH_SHORT).show();
-//                                restaurant.setParseId(restaurant.getId());
-//                                o.setParseImageUrl(restaurant.getImageUrl());
 
                             } else {
                                 Log.e("XXX", "Object not saved",e );
@@ -124,6 +119,7 @@ public class RestaurantsAdapter extends RecyclerView.Adapter<RestaurantsAdapter.
                             }
                         }
                     });
+                    //ets the opacity of the view to a value from 0 to 1, where 0 means the view is completely transparent and 1 means the view is completely opaque.
                     imageViewHeart.setAlpha(0.70f);
                     if(drawable instanceof AnimatedVectorDrawableCompat){
                         avd = (AnimatedVectorDrawableCompat) drawable;
